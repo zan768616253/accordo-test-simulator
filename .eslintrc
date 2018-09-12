@@ -1,0 +1,13 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "jasmine": true,
+    "protractor": true
+  },
+  "rules": {
+    "no-console": 0,
+    "semi": ["error", "never"],
+    "indent": ["error", 4],
+    "comma-dangle": ["error", "only-multiline"]
+  }
+}
