@@ -136,9 +136,11 @@ module.exports = (config) => {
                                 presets: ['es2015', 'react'],
                                 plugins: ['rewire', 'istanbul'],
                             },
-                        }, {
-                            loader: 'eslint-loader',
-                        }],
+                        },
+                        // {
+                        //     loader: 'eslint-loader',
+                        // }
+                        ],
                         exclude: /(node_modules|tests)/,
                     },
                     {

@@ -1,38 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ControlButton = ({type, moveFuc}) => {
-    let icon, buttonClass
-    switch(type) {
-        case 'turnLeft':
-            buttonClass = 'btn btn-turning'
-            icon = <i className="fa fa-arrow-left" aria-hidden="true"/>
-            break
-        case 'turnRight':
-            buttonClass = 'btn btn-turning'
-            icon = <i className="fa fa-arrow-right" aria-hidden="true"/>
-            break
-        case 'stepFoward':
-            buttonClass = 'btn btn-forward'
-            icon = <i className="fa fa-step-forward" aria-hidden="true"/>
-            break
-        case 'place':
-            buttonClass = 'btn btn-place'
-            icon = <i className="fa fa-map-marker" aria-hidden="true"/>
-            break
-    }
+import ControlBase from './ControlBase'
 
+const ControlButton = ({buttonClass, icon, moveFunc, x, y, direction}) => {
     return (
-        <a className={buttonClass}>
+        <a
+            className={buttonClass}
+            onClick={() => { moveFunc({posX : x, posY: y, direction: direction}) }}
+        >
             {icon}
         </a>
     )
 }
 
-
 ControlButton.propTypes = {
-    type: PropTypes.string,
-    moveFuc: PropTypes.func
-};
+    type: PropTypes.string
+}
 
-export default ControlButton;
+const mapStateToProps = () => ({
+    controlType: 'Button'
+})
+
+export { ControlButton as ControlButtonCom }
+export default ControlBase(ControlButton, mapStateToProps);

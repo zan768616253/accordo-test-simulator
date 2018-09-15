@@ -50,12 +50,34 @@
           width: 100%;
           height: 100%;
 
-          .block {
+          .block, .bus {
+            position: relative;
             background: lightblue;
             margin: 2px;
             flex: 1 1 calc(20% - 4px);
             min-width: 1px;
             min-height: 1px;
+          }
+
+          .bus {
+            .bus-content{
+              position: absolute;
+              height: 100%;
+              width: 100%;
+
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              .bus-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                height: 50%;
+                width: 50%;
+              }
+            }
           }
         }
       }

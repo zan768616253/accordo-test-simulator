@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import ParkingLots from '../components/ParkingLot'
 import ControlButton from '../components/ControlButton'
 import ControlDropdown from '../components/ControlDropdown'
-
 
 class App extends PureComponent {
     constructor(props) {
@@ -11,71 +12,20 @@ class App extends PureComponent {
     }
 
     render() {
-        const positonOpt = [
-            {
-                value: 1,
-                label: '1'
-            },
-            {
-                value: 2,
-                label: '2'
-            },
-            {
-                value: 3,
-                label: '3'
-            },
-            {
-                value: 4,
-                label: '4'
-            },
-            {
-                value: 5,
-                label: '5'
-            },
-        ]
-
-        const directionOpt = [
-            {
-                value: 'NORTH',
-                label: 'NORTH'
-            },
-            {
-                value: 'EAST',
-                label: 'EAST'
-            },
-            {
-                value: 'SOUTH',
-                label: 'SOUTH'
-            },
-            {
-                value: 'West',
-                label: 'West'
-            }
-        ]
-
-        const defaultPositionOption = positonOpt[0]
-        const defaultDirectionOption = directionOpt[0]
-
-        function _onPositionSelect(type) {
-        }
-
-        function _onDirectionSelect(option) {
-        }
-
-        function _onBusSelect(option) {
-        }
+        const {buses, selectedBusId} = this.props
 
         return (
+
             <div className='main'>
                 <div className='row row-5'>
                     <div className='flex-col'>
-                        <ControlDropdown options={positonOpt} onChange={()=>{_onPositionSelect('X')}} value={defaultPositionOption} placeholder="Select X" />
+                        <ControlDropdown type='posX' />
                     </div>
                     <div className='flex-col'>
-                        <ControlDropdown options={positonOpt} onChange={()=>{_onPositionSelect('Y')}} value={defaultPositionOption} placeholder="Select Y" />
+                        <ControlDropdown type='posY' />
                     </div>
                     <div className='flex-col'>
-                        <ControlDropdown options={directionOpt} onChange={_onBusSelect} value={defaultDirectionOption} placeholder="Select direction" />
+                        <ControlDropdown type='direction' />
                     </div>
                     <div className='flex-col'>
                         <ControlButton
@@ -83,7 +33,7 @@ class App extends PureComponent {
                         />
                     </div>
                     <div className='flex-col'>
-                        <ControlDropdown options={positonOpt} onChange={_onBusSelect} value={defaultPositionOption} placeholder="Select direction" />
+                        <ControlDropdown type='busIndex' />
                     </div>
                 </div>
                 <div className='row row-3'>
@@ -93,7 +43,7 @@ class App extends PureComponent {
                         />
                     </div>
                     <div className='flex-col'>
-                        <ParkingLots />
+                        <ParkingLots buses={buses} selectedBusId={selectedBusId} />
                     </div>
                     <div className='flex-col'>
                         <ControlButton
@@ -111,4 +61,26 @@ class App extends PureComponent {
     }
 }
 
-export default App
+App.propTypes = {
+    buses: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
+        posX: PropTypes.number,
+        posY: PropTypes.number,
+        direction: PropTypes.string,
+    })),
+    selectedBusId: PropTypes.string,
+    notification: PropTypes.string,
+}
+
+/* istanbul ignore next */
+const mapStateToProps = state => ({
+    buses: state.buses,
+    selectedBusId: state.selectedBusId
+})
+
+/* istanbul ignore next */
+const mapDispatchToProps = dispatch => ({
+})
+
+export { App as AppCom }
+export default connect(mapStateToProps, mapDispatchToProps)(App)

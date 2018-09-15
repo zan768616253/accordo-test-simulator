@@ -1,5 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import ControlBase from './ControlBase'
 
 class ControlDropdown extends React.Component {
     constructor (props) {
@@ -88,14 +90,12 @@ class ControlDropdown extends React.Component {
             <div className={`${baseClassName}-select`}>
                 <ul>{ops}</ul>
             </div>
-            : <div className={`${baseClassName}-noresults`}>No options found</div>
+            : ''
     }
 
     handleDocumentClick (event) {
-        console.log('Dai Le ----', event);
-        if (this.mounted) {
-            console.log(ReactDOM.findDOMNode(this));
 
+        if (this.mounted) {
             if (!ReactDOM.findDOMNode(this).contains(event.target)) {
                 this.setState({ isOpen: false })
             }
@@ -126,4 +126,9 @@ class ControlDropdown extends React.Component {
 
 ControlDropdown.defaultProps = { baseClassName: 'dropdown' }
 
-export default ControlDropdown;
+const mapStateToProps = () => ({
+    controlType: 'Dropdown',
+})
+
+export { ControlDropdown as ControlDropdownCom }
+export default ControlBase(ControlDropdown, mapStateToProps);
