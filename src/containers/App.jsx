@@ -5,17 +5,17 @@ import { connect } from 'react-redux';
 import ParkingLots from '../components/ParkingLot'
 import ControlButton from '../components/ControlButton'
 import ControlDropdown from '../components/ControlDropdown'
+import ControlCMD from '../components/ControlCMD'
 
 class App extends PureComponent {
     constructor(props) {
-        super(props);
+        super(props)
     }
 
     render() {
         const {buses, selectedBusId} = this.props
 
         return (
-
             <div className='main'>
                 <div className='row row-5'>
                     <div className='flex-col'>
@@ -56,6 +56,7 @@ class App extends PureComponent {
                         type='stepFoward'
                     />
                 </div>
+                <ControlCMD />
             </div>
         )
     }

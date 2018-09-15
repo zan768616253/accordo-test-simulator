@@ -1,6 +1,5 @@
 @import './components/ControlDropdown';
-
-
+@import './components/ControlCMD';
 
 .app {
   height: 100%;
@@ -85,8 +84,17 @@
   }
 
   .row-3 {
+
+    &.thick-row {
+      height: 150px;
+    }
+
     .flex-col {
       width: 33%;
+
+      textarea {
+        height: 120px;
+      }
     }
   }
 

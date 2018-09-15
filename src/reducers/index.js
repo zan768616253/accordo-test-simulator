@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import {CREATE_NEW_BUS, SET_SELECTED_BUS, SET_BUS_POSITION, SET_CONTROL_X, SET_CONTROL_Y, SET_CONTROL_DIRECTION} from '../actions';
+import {CREATE_NEW_BUS, SET_SELECTED_BUS, SET_BUS_POSITION, SET_CONTROL_X, SET_CONTROL_Y, SET_CONTROL_DIRECTION, SET_REPORT} from '../actions';
 
 export const DEFAULT_STATE = {
     buses: [],
@@ -37,6 +37,9 @@ export default (state = DEFAULT_STATE, action) => {
             return newState
         case SET_SELECTED_BUS:
             newState.selectedBusId = action.busId
+            return newState
+        case SET_REPORT:
+            newState.report = action.message
             return newState
         default:
             return state

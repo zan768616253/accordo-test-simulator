@@ -7,6 +7,7 @@ export const SET_CONTROL_X = 'SET_CONTROL_X'
 export const SET_CONTROL_Y = 'SET_CONTROL_Y'
 export const SET_CONTROL_DIRECTION = 'SET_CONTROL_DIRECTION'
 export const SET_BUS_POSITION = 'SET_BUS_POSITION'
+export const SET_REPORT = 'SET_REPORT'
 
 export const createNewBus = position => ({
     type: CREATE_NEW_BUS,
@@ -37,6 +38,11 @@ export const setBusPosition = (id, position) => ({
     type: SET_BUS_POSITION,
     newPosition: position,
     busId: id,
+})
+
+export const setReport = message => ({
+    type: SET_REPORT,
+    message,
 })
 
 export const selectBus = busId => (dispatch, getState) => {

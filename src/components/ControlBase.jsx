@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { placeNewBus, moveExistingBus, selectBus, setControlX, setControlY, setControlDirection, turnExistingBus } from '../actions'
+import { placeNewBus, moveExistingBus, selectBus, setControlX, setControlY, setControlDirection, turnExistingBus, setReport } from '../actions'
 import { DIR_ALL } from '../constants'
 import { busStepForward, rotateBus } from '../helpers'
 
@@ -17,6 +17,7 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
             this.onSetX = this.onSetX.bind(this)
             this.onSetY = this.onSetY.bind(this)
             this.onPickBus = this.onPickBus.bind(this)
+            this.onUpdateReport = this.onUpdateReport.bind(this)
         }
 
         onCreateNewBus() {
@@ -75,6 +76,19 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
         onPickBus(value) {
             const { pickBus } = this.props
             return pickBus(value)
+        }
+
+        onUpdateReport(isClearMsg) {
+            const { buses, selectedBusId, updateReport } = this.props;
+            if (isClearMsg) {
+                return updateReport('');
+            }
+            const selectedBus = buses.find(bus => bus.id === selectedBusId);
+            if (selectedBus) {
+                const currentPosMsg = `${selectedBus.posX},${selectedBus.posY},${selectedBus.direction}`;
+                return updateReport(currentPosMsg);
+            }
+            return Promise.resolve();
         }
 
         render() {
@@ -183,6 +197,17 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
                     value = {value}
                     placeholder = {placeholder}
                 />)
+            } else if (controlType === 'CMD') {
+
+                return (<WrappedComponent
+                    {...this.props}
+                    onCreateNewBus = {this.onCreateNewBus}
+                    onTurnBusRight = {this.onTurnBusRight}
+                    onTurnBusLeft = {this.onTurnBusLeft}
+                    onMoveBus = {this.onMoveBus}
+                    onPickBus = {this.onPickBus}
+                    onUpdateReport = {this.onUpdateReport}
+                />)
             }
         }
     }
@@ -225,6 +250,9 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
         },
         pickBus(busId) {
             return dispatch(selectBus(busId))
+        },
+        updateReport(message) {
+            return dispatch(setReport(message));
         }
     })
     return connect(defualtMapStateToProps, mapDispatchToProps)(BusController)
