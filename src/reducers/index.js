@@ -7,7 +7,8 @@ export const DEFAULT_STATE = {
     selectedBusId: null,
     controlX: 0,
     controlY: 0,
-    controlDirection: 'NORTH'
+    controlDirection: 'NORTH',
+    report: ''
 }
 
 export default (state = DEFAULT_STATE, action) => {

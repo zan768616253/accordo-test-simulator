@@ -65,7 +65,7 @@ class ControlCMD extends PureComponent {
     render() {
         const { report } = this.props;
         return (
-            <div className='row row-3 thick-row'>
+            <div className='row row-4 thick-row'>
                 <div className='flex-col'>
                     <textarea
                         ref={(ele) => { this.cmdInputDom = ele; }}
@@ -93,6 +93,9 @@ class ControlCMD extends PureComponent {
                     </button>
                 </div>
                 <div className='flex-col'>
+                    <div className='report-wrapper'>
+                        {report}
+                    </div>
                 </div>
             </div>
         )

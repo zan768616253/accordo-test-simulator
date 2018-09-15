@@ -12,9 +12,9 @@ app.set('port', (process.env.PORT_WEBSERVER || 3000))
 if (process.env.NODE_ENV === 'production') {
     app.use('/public', express.static(path.join(__dirname, '../')))
 } else {
-    const webpack = require('webpack') // eslint-disable-line
+    const webpack = require('webpack')
     const webpackDevMiddleware = require('webpack-dev-middleware') // eslint-disable-line
-    const webpackConfig = require('./webpack.config') // eslint-disable-line
+    const webpackConfig = require('../webpack.config') // eslint-disable-line
     const compiler = webpack(webpackConfig)
     app.use(webpackDevMiddleware(compiler, {
         publicPath: '/public/'
@@ -29,3 +29,4 @@ app.get('/', (req, res) => {
 app.listen(app.get('port'), () => {
     console.log(`Server started: http://localhost:${app.get('port')}/`)
 })
+

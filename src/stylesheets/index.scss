@@ -84,17 +84,23 @@
   }
 
   .row-3 {
+    .flex-col {
+      width: 33%;
+    }
+  }
 
+  .row-4 {
     &.thick-row {
       height: 150px;
     }
 
-    .flex-col {
-      width: 33%;
+    textarea {
+      height: 120px;
+    }
 
-      textarea {
-        height: 120px;
-      }
+    .flex-col {
+      position: relative;
+      width: 25%;
     }
   }
 

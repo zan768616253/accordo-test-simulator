@@ -223,7 +223,8 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
         moveBus: PropTypes.func,
         controlX: PropTypes.number,
         controlY: PropTypes.number,
-        controlDirection: PropTypes.string
+        controlDirection: PropTypes.string,
+        report: PropTypes.string
     }
 
     const defualtMapStateToProps = state => ({
@@ -232,7 +233,8 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
         selectedBusId: state.selectedBusId,
         posX: state.controlX,
         posY: state.controlY,
-        direction: state.controlDirection
+        direction: state.controlDirection,
+        report: state.report
     })
 
     const mapDispatchToProps = dispatch => ({
