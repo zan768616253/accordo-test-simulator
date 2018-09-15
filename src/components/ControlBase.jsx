@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { placeNewBus, moveExistingBus, selectBus, setControlX, setControlY, setControlDirection } from '../actions'
+import { placeNewBus, moveExistingBus, selectBus, setControlX, setControlY, setControlDirection, turnExistingBus } from '../actions'
 import { DIR_ALL } from '../constants'
+import { busStepForward, rotateBus } from '../helpers'
 
 const ControlBase = (WrappedComponent, mapStateToProps) => {
     class BusController extends PureComponent {
@@ -11,9 +12,11 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
             super(props)
             this.onCreateNewBus = this.onCreateNewBus.bind(this)
             this.onMoveBus = this.onMoveBus.bind(this)
-            this.onTurnBus = this.onTurnBus.bind(this)
+            this.onTurnBusRight = this.onTurnBusRight.bind(this)
+            this.onTurnBusLeft = this.onTurnBusLeft.bind(this)
             this.onSetX = this.onSetX.bind(this)
             this.onSetY = this.onSetY.bind(this)
+            this.onPickBus = this.onPickBus.bind(this)
         }
 
         onCreateNewBus() {
@@ -21,10 +24,37 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
             return createNewBus({ posX, posY, direction })
         }
 
-        onMoveBus(isForward) {
+        onTurnBusRight() {
+            const { turnBus, selectedBusId, buses } = this.props
+            const bus = buses.find(b => {
+                return b.id === selectedBusId
+            })
+            if (bus) {
+                const newPosition = rotateBus(bus, true)
+                turnBus(selectedBusId, newPosition.direction)
+            }
         }
 
-        onTurnBus(isClockwise) {
+        onTurnBusLeft() {
+            const { turnBus, selectedBusId, buses } = this.props
+            const bus = buses.find(b => {
+                return b.id === selectedBusId
+            })
+            if (bus) {
+                const newPosition = rotateBus(bus, false)
+                turnBus(selectedBusId, newPosition.direction)
+            }
+        }
+
+        onMoveBus() {
+            const {buses, selectedBusId, moveBus} = this.props
+            const bus = buses.find(b => {
+                return b.id === selectedBusId
+            })
+            if (bus) {
+                const newPosition = busStepForward(bus)
+                moveBus(selectedBusId, newPosition)
+            }
         }
 
         onSetX(value) {
@@ -42,6 +72,11 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
             return setDirection(value)
         }
 
+        onPickBus(value) {
+            const { pickBus } = this.props
+            return pickBus(value)
+        }
+
         render() {
             const self = this
             const { controlType, type } = this.props
@@ -51,12 +86,12 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
                     case 'turnLeft':
                         buttonClass = 'btn btn-turning'
                         icon = <i className="fa fa-arrow-left" aria-hidden="true"/>
-                        moveFunc = this.onMoveBus
+                        moveFunc = this.onTurnBusLeft
                         break
                     case 'turnRight':
                         buttonClass = 'btn btn-turning'
                         icon = <i className="fa fa-arrow-right" aria-hidden="true"/>
-                        moveFunc = this.onMoveBus
+                        moveFunc = this.onTurnBusRight
                         break
                     case 'stepFoward':
                         buttonClass = 'btn btn-forward'
@@ -109,6 +144,7 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
                 }
 
                 function _onBusSelect(option) {
+                    return self.onPickBus(option.value)
                 }
 
                 switch(type) {
@@ -128,10 +164,10 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
                         value = direction
                         break
                     case 'busIndex':
-                        options = (new Array(buses.length)).map((item, index) => {
+                        options = buses.map((item, index) => {
                             return {
-                                value: index,
-                                label: index
+                                value: item.id,
+                                label: item.id
                             }
                         })
                         onChange = _onBusSelect
@@ -172,8 +208,11 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
         createNewBus(position) {
             return dispatch(placeNewBus(position))
         },
-        moveBus(position, busId) {
-            return dispatch(moveExistingBus(position, busId))
+        moveBus(busId, position) {
+            return dispatch(moveExistingBus(busId, position))
+        },
+        turnBus(busId, direction) {
+            return dispatch(turnExistingBus(busId, direction))
         },
         setX(x) {
             return dispatch(setControlX(x))
@@ -183,6 +222,9 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
         },
         setDirection(direction) {
             return dispatch(setControlDirection(direction))
+        },
+        pickBus(busId) {
+            return dispatch(selectBus(busId))
         }
     })
     return connect(defualtMapStateToProps, mapDispatchToProps)(BusController)

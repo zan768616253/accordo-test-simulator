@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Bus from './Bus'
+import {PARKINGLOT_SIZE} from '../constants'
 
 const ParkingLots = ({buses, selectedBusId}) => {
-    const SIZE = 5
+    const SIZE = PARKINGLOT_SIZE
 
     let blocks = []
 

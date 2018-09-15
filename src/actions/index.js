@@ -1,11 +1,12 @@
-import {busExists} from '../helpers'
+import _ from 'lodash'
+import {busExists, positionValid} from '../helpers'
 
 export const CREATE_NEW_BUS = 'CREATE_NEW_BUS'
 export const SET_SELECTED_BUS = 'SET_SELECTED_BUS'
-export const MOVE_EXISTING_BUS = 'MOVE_EXISTING_BUS'
 export const SET_CONTROL_X = 'SET_CONTROL_X'
 export const SET_CONTROL_Y = 'SET_CONTROL_Y'
 export const SET_CONTROL_DIRECTION = 'SET_CONTROL_DIRECTION'
+export const SET_BUS_POSITION = 'SET_BUS_POSITION'
 
 export const createNewBus = position => ({
     type: CREATE_NEW_BUS,
@@ -32,6 +33,12 @@ export const setControlDirection = (direction) => ({
     value: direction
 })
 
+export const setBusPosition = (id, position) => ({
+    type: SET_BUS_POSITION,
+    newPosition: position,
+    busId: id,
+})
+
 export const selectBus = busId => (dispatch, getState) => {
     let selectedBusId;
     const { buses } = getState()
@@ -45,12 +52,6 @@ export const selectBus = busId => (dispatch, getState) => {
     dispatch(setSelectedBusId(selectedBusId))
 }
 
-export const moveExistingBus = (position, id) => ({
-    type: MOVE_EXISTING_BUS,
-    newPosition: position,
-    busId: id
-})
-
 export const placeNewBus = (position) => (dispatch, getState) => {
     const { buses } = getState()
     const isExist = busExists(position, buses)
@@ -60,3 +61,22 @@ export const placeNewBus = (position) => (dispatch, getState) => {
     }
 }
 
+export const moveExistingBus = (id, position) => (dispatch, getState) => {
+    const { buses } = getState()
+    const isExist = busExists(position, buses)
+    const isPositionValid = positionValid(position)
+
+    if (!isExist && isPositionValid) {
+        dispatch(setBusPosition(id, position))
+    }
+}
+
+export const turnExistingBus = (id, direction) => (dispatch, getState) => {
+    const { buses } = getState()
+    const oldDirection = buses.find(b => {
+        return b.id === id
+    })
+    const newDirection = _.cloneDeep(oldDirection)
+    newDirection.direction = direction
+    dispatch(setBusPosition(id, newDirection))
+}

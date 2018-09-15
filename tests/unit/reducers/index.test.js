@@ -1,4 +1,10 @@
-import {CREATE_NEW_BUS, SET_SELECTED_BUS, MOVE_EXISTING_BUS, SET_CONTROL_X, SET_CONTROL_Y} from '../../../src/actions'
+import {
+    CREATE_NEW_BUS,
+    SET_CONTROL_X,
+    SET_CONTROL_Y,
+    SET_CONTROL_DIRECTION, SET_SELECTED_BUS,
+} from '../../../src/actions'
+import { DIR_WEST } from '../../../src/constants'
 import Reducer, { DEFAULT_STATE } from '../../../src/reducers'
 import TEST_BUSES from '../../data/buses'
 
@@ -46,5 +52,29 @@ describe('Reducers', () => {
         }, action)
 
         expect(state.controlY).toEqual(action.value)
+    })
+
+    it('handles action SET_CONTROL_DIRECTION', () => {
+        const action = {
+            type: SET_CONTROL_DIRECTION,
+            value: DIR_WEST
+        }
+        const state = Reducer({
+            ...initialState
+        }, action)
+
+        expect(state.controlDirection).toEqual(action.value)
+    })
+
+    it('handles action SET_SELECTED_BUS', () => {
+        const action = {
+            type: SET_SELECTED_BUS,
+            busId: '1'
+        }
+        const state = Reducer({
+            ...initialState
+        }, action)
+
+        expect(state.selectedBusId).toEqual(action.busId)
     })
 })

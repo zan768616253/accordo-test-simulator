@@ -23,7 +23,7 @@ const Bus = ({ id, direction, isActive }) => {
 Bus.propTypes = {
     id: PropTypes.string,
     direction: PropTypes.string,
-    className: PropTypes.string,
+    isActive: PropTypes.bool
 };
 
 export default Bus;

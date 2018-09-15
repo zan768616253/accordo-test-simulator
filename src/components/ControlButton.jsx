@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import ControlBase from './ControlBase'
 
-const ControlButton = ({buttonClass, icon, moveFunc, x, y, direction}) => {
+const ControlButton = ({buttonClass, icon, moveFunc}) => {
     return (
         <a
             className={buttonClass}
-            onClick={() => { moveFunc({posX : x, posY: y, direction: direction}) }}
+            onClick={() => { moveFunc() }}
         >
             {icon}
         </a>

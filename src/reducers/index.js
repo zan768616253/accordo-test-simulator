@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import {CREATE_NEW_BUS, SET_SELECTED_BUS, MOVE_EXISTING_BUS, SET_CONTROL_X, SET_CONTROL_Y, SET_CONTROL_DIRECTION} from '../actions';
+import {CREATE_NEW_BUS, SET_SELECTED_BUS, SET_BUS_POSITION, SET_CONTROL_X, SET_CONTROL_Y, SET_CONTROL_DIRECTION} from '../actions';
 
 export const DEFAULT_STATE = {
     buses: [],
@@ -27,6 +27,13 @@ export default (state = DEFAULT_STATE, action) => {
             return newState
         case SET_CONTROL_DIRECTION:
             newState.controlDirection = action.value
+            return newState
+        case SET_BUS_POSITION:
+            const {busId, newPosition} = action
+            const buses = state.buses.map(bus => {
+                return bus.id === busId ? newPosition : bus
+            })
+            newState.buses = buses
             return newState
         case SET_SELECTED_BUS:
             newState.selectedBusId = action.busId
