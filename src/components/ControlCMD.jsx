@@ -29,7 +29,7 @@ class ControlCMD extends PureComponent {
     }
 
     onParseCmds() {
-        const { onCreateNewBus, onTurnBusRight, onTurnBusLeft, onMoveBus, onPickBus, onUpdateReport } = this.props;
+        const { onCreateNewBusWithPosition, onTurnBusRight, onTurnBusLeft, onMoveBus, onPickBus, onUpdateReport } = this.props;
         let cmdsPromise = Promise.resolve(onUpdateReport(true));
 
         const { cmds } = this.state;
@@ -43,11 +43,7 @@ class ControlCMD extends PureComponent {
                 switch (cmdType) {
                     case CMD_PLACE:
                         if (cmdArgs.length > 2) {
-                            return onCreateNewBus({
-                                posX: parseInt(cmdArgs[0], 10),
-                                posY: parseInt(cmdArgs[1], 10),
-                                direction: cmdArgs[2],
-                            });
+                            return onCreateNewBusWithPosition(parseInt(cmdArgs[0], 10), parseInt(cmdArgs[1], 10), cmdArgs[2]);
                         }
                         return Promise.resolve()
                     case CMD_TURN_LEFT:
@@ -93,8 +89,10 @@ class ControlCMD extends PureComponent {
                         id="cmd-exec"
                         onClick={this.onParseCmds}
                     >
-                        GO
+                        Report
                     </button>
+                </div>
+                <div className='flex-col'>
                 </div>
             </div>
         )
@@ -104,7 +102,7 @@ class ControlCMD extends PureComponent {
 
 ControlCMD.propTypes = {
     report: PropTypes.string,
-    onCreateNewBus: PropTypes.func,
+    onCreateNewBusWithPosition: PropTypes.func,
     onTurnBusRight: PropTypes.func,
     onTurnBusLeft: PropTypes.func,
     onMoveBus: PropTypes.func,

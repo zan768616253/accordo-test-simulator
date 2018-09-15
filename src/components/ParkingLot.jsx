@@ -14,7 +14,7 @@ const ParkingLots = ({buses, selectedBusId}) => {
     }
     for (let i = 0; i < buses.length; i++){
         const bus = buses[i]
-        const busIndex = bus.posX - 1 + (bus.posY -1 ) * SIZE
+        const busIndex = bus.posX + ((SIZE - 1 - bus.posY) * SIZE)
         blocks[busIndex] = bus
     }
 

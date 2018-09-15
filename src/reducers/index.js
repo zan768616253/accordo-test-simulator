@@ -5,8 +5,8 @@ import {CREATE_NEW_BUS, SET_SELECTED_BUS, SET_BUS_POSITION, SET_CONTROL_X, SET_C
 export const DEFAULT_STATE = {
     buses: [],
     selectedBusId: null,
-    controlX: 1,
-    controlY: 1,
+    controlX: 0,
+    controlY: 0,
     controlDirection: 'NORTH'
 }
 

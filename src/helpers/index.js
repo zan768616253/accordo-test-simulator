@@ -13,8 +13,8 @@ export const busExists = (newPosition, existingBuses) => {
 }
 
 export const positionValid = (newPosition) => {
-    if (newPosition.posX <= PARKINGLOT_SIZE
-        && newPosition.posY <= PARKINGLOT_SIZE && newPosition.posX > 0 && newPosition.posY > 0) {
+    if (newPosition.posX < PARKINGLOT_SIZE
+        && newPosition.posY < PARKINGLOT_SIZE && newPosition.posX > -1 && newPosition.posY > -1) {
         return true;
     } else {
         return false
@@ -26,10 +26,10 @@ export const busStepForward = (bus) => {
     const direction = newPosition.direction
     switch (direction) {
         case DIR_NORTH:
-            newPosition.posY = newPosition.posY - 1
+            newPosition.posY = newPosition.posY + 1
             break
         case DIR_SOUTH:
-            newPosition.posY = newPosition.posY + 1
+            newPosition.posY = newPosition.posY - 1
             break
         case DIR_WEST:
             newPosition.posX = newPosition.posX - 1

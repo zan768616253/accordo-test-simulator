@@ -11,6 +11,7 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
         constructor(props) {
             super(props)
             this.onCreateNewBus = this.onCreateNewBus.bind(this)
+            this.onCreateNewBusWithPosition = this.onCreateNewBusWithPosition.bind(this)
             this.onMoveBus = this.onMoveBus.bind(this)
             this.onTurnBusRight = this.onTurnBusRight.bind(this)
             this.onTurnBusLeft = this.onTurnBusLeft.bind(this)
@@ -22,6 +23,11 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
 
         onCreateNewBus() {
             const { createNewBus, posX, posY, direction } = this.props
+            return createNewBus({ posX, posY, direction })
+        }
+
+        onCreateNewBusWithPosition(posX, posY, direction) {
+            const { createNewBus } = this.props
             return createNewBus({ posX, posY, direction })
         }
 
@@ -130,10 +136,10 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
 
                 let options, onChange, value, placeholder
 
-                const positonOpt = [1, 2, 3, 4, 5].map(num => {
+                const positonOpt = [0,1,2,3,4].map(num => {
                     return {
                         value: num,
-                        label: num
+                        label: num.toString()
                     }
                 })
 
@@ -201,7 +207,7 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
 
                 return (<WrappedComponent
                     {...this.props}
-                    onCreateNewBus = {this.onCreateNewBus}
+                    onCreateNewBusWithPosition = {this.onCreateNewBusWithPosition}
                     onTurnBusRight = {this.onTurnBusRight}
                     onTurnBusLeft = {this.onTurnBusLeft}
                     onMoveBus = {this.onMoveBus}
