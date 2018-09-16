@@ -4,10 +4,12 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./public/server/server.js",
+    "dev": "webpack --config=webpack.config.js -w",
     "server": "cross-env NODE_ENV=development babel-node ./server/server.js",
-    "build": "cross-env NODE_ENV=production npm run build:app && npm run build:server",
+    "build": "cross-env NODE_ENV=production npm run build:client && npm run build:server",
     "build:client": "webpack --config=webpack.config.js",
-    "build:server": "babel ./server --out-dir ./public/server --copy-files"
+    "build:server": "babel ./server --out-dir ./public/server --copy-files",
+    "test": "karma start"
   },
   "dependencies": {
     "cross-env": "3.1.3",

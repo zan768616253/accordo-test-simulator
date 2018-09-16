@@ -71,6 +71,7 @@ class ControlCMD extends PureComponent {
                         ref={(ele) => { this.cmdInputDom = ele; }}
                         id={'cmd-input'}
                         onChange={(e) => { this.setState({ cmds: e.target.value })}}
+                        placeholder='This is cimmand area'
                     />
                 </div>
                 <div className='flex-col'>

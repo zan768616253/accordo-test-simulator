@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import ParkingLots from '../../../src/components/ParkingLot'
 
-describe('<Bus />', () => {
+describe('<ParkingLots />', () => {
     const defaultProps = {
         buses: [],
         selectedBusId: '1'

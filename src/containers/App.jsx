@@ -40,7 +40,7 @@ class App extends PureComponent {
                         <ControlDropdown type='busIndex' />
                     </div>
                 </div>
-                <div className='row row-3'>
+                <div className='row row-3 main-row'>
                     <div className='flex-col'>
                         <ControlButton
                             type='turnLeft'

@@ -20,6 +20,11 @@
     align-items: center;
     width: 100%;
     min-height: 50px;
+    border-bottom: 2px solid lightgrey;
+
+    &.main-row {
+      border-bottom: none;
+    }
 
     .flex-col {
       display: flex;

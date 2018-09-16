@@ -32,7 +32,7 @@ describe('Helpers', () => {
             .toEqual(false)
     })
 
-    it('detect the position is not valid', () => {
+    it('should move bus one step forward', () => {
         const bus = {
             posX: 1,
             posY: 1,
@@ -48,7 +48,7 @@ describe('Helpers', () => {
     })
 
 
-    it('detect the position is not valid', () => {
+    it('should rotate the bus', () => {
         const bus = {
             posX: 1,
             posY: 1,
