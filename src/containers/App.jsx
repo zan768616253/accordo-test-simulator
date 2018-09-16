@@ -19,15 +19,19 @@ class App extends PureComponent {
             <div className='main'>
                 <div className='row row-5'>
                     <div className='flex-col'>
+                        <span>X:</span>
                         <ControlDropdown type='posX' />
                     </div>
                     <div className='flex-col'>
+                        <span>Y:</span>
                         <ControlDropdown type='posY' />
                     </div>
                     <div className='flex-col'>
+                        <span>D:</span>
                         <ControlDropdown type='direction' />
                     </div>
                     <div className='flex-col'>
+                        <span>Place</span>
                         <ControlButton
                             type='place'
                         />

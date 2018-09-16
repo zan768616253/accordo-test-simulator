@@ -1,7 +1,8 @@
 @mixin dropdown($prefix, $width-dropdown, $height-dropdown) {
   position: relative;
-  color: #aab2bd;
+  color: grey;
   display: inline-block;
+  font-weight: bold;
   .#{$prefix}-option {
     font-size: 13px;
     padding-left: 5px;
@@ -22,8 +23,8 @@
 
   .#{$prefix}-current {
     position: relative;
-    border: solid 1px #e4e8ed;
-    border-radius: 2px;
+    border-radius: 8px;
+    border: 2px solid gray;
     width: $width-dropdown;
     height: $height-dropdown;
     background-color: #fff;
@@ -37,7 +38,6 @@
       border-color: #999 transparent transparent;
       border-style: solid;
       border-width: 5px 5px 0;
-      content: ' ';
       display: block;
       height: 0;
       width: 0;

@@ -14,7 +14,7 @@ const Bus = ({ id, direction, isActive }) => {
         <div className='bus-content' >
             <div className='bus-wrapper'>
                 <span className={'bus-id'} >{id}</span>
-                <i className={"fa fa-bus " + rotate} aria-hidden="true" />
+                <i className={"fa fa-bus fa-2x " + rotate} aria-hidden="true" />
             </div>
         </div>
     </div>);

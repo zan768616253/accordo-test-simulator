@@ -27,8 +27,14 @@
       justify-content: center;
       align-items: center;
 
+      > span {
+        margin-right: 5px;
+        color: grey;
+        font-weight: bold;
+      }
+
       .dropdown {
-        @include dropdown("dropdown", 86px, 36px);
+        @include dropdown("dropdown", 70px, 36px);
         margin-right: 10px;
       }
 
@@ -75,6 +81,13 @@
                 position: relative;
                 height: 50%;
                 width: 50%;
+
+                .bus-id {
+                  margin-right: 2px;
+                  font-size: 16px;
+                  font-weight: bold;
+                  color: grey;
+                }
               }
             }
           }
@@ -96,6 +109,7 @@
 
     textarea {
       height: 120px;
+      width: 80%;
     }
 
     .flex-col {

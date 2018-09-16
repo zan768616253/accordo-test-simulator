@@ -84,17 +84,21 @@ class ControlCMD extends PureComponent {
                     </div>
                 </div>
                 <div className='flex-col'>
-                    <button
-                        className='go-btn'
-                        id="cmd-exec"
-                        onClick={this.onParseCmds}
-                    >
-                        Report
-                    </button>
+                    <div className="upload-btn-wrapper">
+                        <button
+                            className='go-btn'
+                            id="cmd-exec"
+                            onClick={this.onParseCmds}
+                        >
+                            Report
+                        </button>
+                    </div>
                 </div>
                 <div className='flex-col'>
                     <div className='report-wrapper'>
-                        {report}
+                        <div className='report-message'>
+                            {report ? report : '...'}
+                        </div>
                     </div>
                 </div>
             </div>

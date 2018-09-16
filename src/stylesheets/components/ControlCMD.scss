@@ -2,6 +2,7 @@
   position: relative;
   overflow: hidden;
   display: inline-block;
+  width: 80%;
 }
 
 .upload-btn, .go-btn {
@@ -10,7 +11,7 @@
   background-color: white;
   padding: 8px 20px;
   border-radius: 8px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
 }
@@ -39,4 +40,13 @@
   width: 100%;
   color: gray;
   font-size: 16px;
+
+  .report-message {
+    border: 2px solid gray;
+    color: gray;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 9px;
+  }
 }

@@ -105,22 +105,22 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
                 switch(type) {
                     case 'turnLeft':
                         buttonClass = 'btn btn-turning'
-                        icon = <i className="fa fa-arrow-left" aria-hidden="true"/>
+                        icon = <i className="fa fa-arrow-left fa-2x" aria-hidden="true"/>
                         moveFunc = this.onTurnBusLeft
                         break
                     case 'turnRight':
                         buttonClass = 'btn btn-turning'
-                        icon = <i className="fa fa-arrow-right" aria-hidden="true"/>
+                        icon = <i className="fa fa-arrow-right fa-2x" aria-hidden="true"/>
                         moveFunc = this.onTurnBusRight
                         break
                     case 'stepFoward':
                         buttonClass = 'btn btn-forward'
-                        icon = <i className="fa fa-step-forward" aria-hidden="true"/>
+                        icon = <i className="fa fa-step-forward fa-2x" aria-hidden="true"/>
                         moveFunc = this.onMoveBus
                         break
                     case 'place':
                         buttonClass = 'btn btn-place'
-                        icon = <i className="fa fa-map-marker" aria-hidden="true"/>
+                        icon = <i className="fa fa-map-marker fa-2x" aria-hidden="true"/>
                         moveFunc = this.onCreateNewBus
                         break
                 }
@@ -192,7 +192,7 @@ const ControlBase = (WrappedComponent, mapStateToProps) => {
                         })
                         onChange = _onBusSelect
                         value = selectedBusId > 0 ? selectedBusId.toString() : null
-                        placeholder="Select bus"
+                        placeholder="Bus No."
                         break
                 }
 
